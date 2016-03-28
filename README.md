@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Primera práctica de PHP
 
 La práctica consiste en hacer una aplicación de registro de usuarios de principio a fin.
@@ -57,3 +58,7 @@ La práctica programada es evaluada y en parejas, la fecha de entrega es miérco
 11:59pm. No habrá extensiones para la entrega.
 
 Si tiene consultas efectuelas por correo a `lpicadoo@ucenfotec.ac.cr`, le responderé a la brevedad posible.
+=======
+# practica-php1
+Repositorio con la práctica de PHP, Proyecto Web 1
+>>>>>>> 535536abc148dd124f06c0e5b9e49b88d56322ec
