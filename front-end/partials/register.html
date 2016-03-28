@@ -4,25 +4,25 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
-        <form novalidate autocomplete="off" name="login" ng-submit="expression">
+        <form novalidate autocomplete="off" name="registerForm" ng-submit="registerUser()">
             <div class="form-group">
                 <label for="email">Name</label>
-                <input type="text" placeholder="Full Name" id="fullName" name="fullName" class="form-control" />
+                <input type="text" placeholder="Juan Pérez" id="fullName" ng-model="user.fullName" name="fullName" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" placeholder="email" id="email" name="email" class="form-control" />
+                <input type="email" placeholder="juanperez@gmail.com" id="email" ng-model="user.email" name="email" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" />
+                <input type="password" id="password" ng-model="user.password" name="password" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="repeat-password">Repeat Password</label>
-                <input type="password" id="repeat-password" name="repeat-password" class="form-control" />
+                <input type="password" id="repeat-password" ng-model="user.repeat_password" name="repeat-password" class="form-control" required/>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-block" value="Register">
+                <input type="submit" class="btn btn-primary btn-block" value="Register" ng-disabled="registerForm.$invalid">
             </div>
         </form>
     </div>
