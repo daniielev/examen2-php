@@ -19,6 +19,9 @@ angular.module('practicaPHP01.controllers')
                  *  - El correo electrónico ya ha sido usado en el sistema.
                  * - En el primer caso, el caso de éxito, envie el usuario a la ruta de `home`.
                  */
+                $scope.registerUser = function () {
+                    alert("Form has been submitted");
+                }
             };
 
             $scope.init();

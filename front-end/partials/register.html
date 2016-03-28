@@ -5,6 +5,15 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <form novalidate autocomplete="off" name="registerForm" ng-submit="registerUser()">
+            <div class="alert alert-danger" role="alert" ng-show="registerForm.fullName.$invalid && registerForm.fullName.$touched">
+                <span class="error">Please provide us your full name.</span>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="registerForm.email.$invalid && registerForm.email.$touched">
+                <span class="error">E-mail is not valid.</span>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="registerForm.email.$invalid && registerForm.email.$touched">
+                <span class="error">E-mail is not valid.</span>
+            </div>
             <div class="form-group">
                 <label for="email">Name</label>
                 <input type="text" placeholder="Juan Pérez" id="fullName" ng-model="user.fullName" name="fullName" class="form-control" required/>
@@ -15,11 +24,11 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" ng-model="user.password" name="password" class="form-control" required/>
+                <input type="password" id="password" ng-model="user.password" name="password" class="form-control" required minlength="8" />
             </div>
             <div class="form-group">
                 <label for="repeat-password">Repeat Password</label>
-                <input type="password" id="repeat-password" ng-model="user.repeat_password" name="repeat-password" class="form-control" required/>
+                <input type="password" id="repeat-password" ng-model="user.repeat_password" name="repeat-password" class="form-control" required minlength="8" />
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-block" value="Register" ng-disabled="registerForm.$invalid">
