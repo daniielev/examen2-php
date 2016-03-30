@@ -124,6 +124,38 @@ class UserController {
          * - Comunique de vuelta al Front-End el resultado de la operación con un array que tenga la misma estructura
          * al que se usó en el método `login`.
          */
+        $formData = $request->getParsedBody();
+        $required_fields = ["email", "password", "repeatPassword", "fullName"];
+
+        if (array_key_exists("email", $formData)) {
+            $email = $formData["email"];
+        }
+
+        if (array_key_exists("password", $formData)) {
+            $password = $formData["password"];
+        }
+
+        if (array_key_exists("repeatPassword", $formData)) {
+            $passwordConfirm = $formData["repeatPassword"];
+        }
+
+        if (array_key_exists("fullName", $formData)) {
+            $fullName = $formData["fullName"];
+        }
+
+        if (isset($email, $password, $passwordConfirm, $fullName)) {
+            $registerUser = $this->userService->register($email, $password, $passwordConfirm, $fullName);
+
+            if (array_key_exists("error", $registerUser)) {
+                $result["error"] = true;
+                $result["message"] = $registerUser["message"];
+            } else {
+                $result["message"] = $registerUser["message"];
+            }
+        } else {
+            $result["error"] = true;
+            $result["error"] = "Email and passwords can not be empty.";
+        }
 
         return $result;
     }

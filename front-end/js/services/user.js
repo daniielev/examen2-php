@@ -67,7 +67,7 @@ angular.module('practicaPHP01.services')
          * @param password
          *
          */
-        var register = function register(email, password) {
+        var register = function register(user) {
             var result = {
                 success: false,
                 message: null
@@ -85,6 +85,31 @@ angular.module('practicaPHP01.services')
              *  - El email ya está registrado en el sistema.
              * - Retorne `true` en el primer caso, en caso contrario retorne `false` y un mensaje de error.
              */
+
+            // Checks if the required fields are defined
+            if (user.email !== undefined && user.password !== undefined && user.repeatPassword !== undefined) {
+
+                // Checks if the passwords match
+                if (user.repeatPassword === user.repeatPassword) {
+
+                    // Calls the back-end service
+                    $http({
+                        method: 'POST',
+                        data: user,
+                        url: '/back-end/user/register'
+                    }).then(function successCallback(response) {
+                        console.debug("Success");
+                        console.log(response)
+                    }, function errorCallback(response) {
+                        console.debug("Error");
+                        console.log(response)
+                    });
+                } else {
+                    result.message = "The passwords do not match."
+                }
+            } else {
+                result.message = "There must be a field missing, please make sure you have enter: the email, the password and the password verification.";
+            }
 
             return result;
         };

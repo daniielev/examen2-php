@@ -20,7 +20,18 @@ angular.module('practicaPHP01.controllers')
                  * - En el primer caso, el caso de éxito, envie el usuario a la ruta de `home`.
                  */
                 $scope.registerUser = function () {
-                    alert("Form has been submitted");
+                    var user = {
+                        fullName : $scope.user.fullName,
+                        email : $scope.user.email,
+                        password : $scope.user.password,
+                        repeatPassword : $scope.user.repeatPassword
+                    };
+
+                    if ($scope.registerForm.$valid) {
+                        UserService.register(user);
+                    }
+
+                    // console.log(user);
                 }
             };
 
