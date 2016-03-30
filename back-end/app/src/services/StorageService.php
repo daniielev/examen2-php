@@ -23,7 +23,7 @@ class StorageService {
          * - Cambie el valor de la variable `$isDBReady` en el `UserService`.
          */
         $config = [
-            'db_host' => 'localhost',
+            'db_host' => '127.0.0.1',
             'db_name' => 'db_php',
             'db_user' => 'localdev',
             'db_pass' => '511382'
