@@ -21,10 +21,10 @@ angular.module('practicaPHP01.controllers')
                  */
                 $scope.registerUser = function () {
                     var user = {
-                        fullName : $scope.user.fullName,
-                        email : $scope.user.email,
-                        password : $scope.user.password,
-                        repeatPassword : $scope.user.repeatPassword
+                        // fullName : $scope.user.fullName,
+                        // email : $scope.user.email,
+                        // password : $scope.user.password,
+                        // repeatPassword : $scope.user.repeatPassword
                     };
 
                     if ($scope.registerForm.$valid) {
