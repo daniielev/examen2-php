@@ -64,7 +64,7 @@ angular.module('practicaPHP01.controllers')
                     }
 
                     if ($scope.loginForm.$valid) {
-                        UserService.register(user);
+                        UserService.login(user);
                     }
                 };
             };

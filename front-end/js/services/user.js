@@ -8,7 +8,7 @@ angular.module('practicaPHP01.services')
          * @param email
          * @param password
          */
-        var login = function(email, password) {
+        var login = function(user) {
             var result = {
                 success: false,
                 message: null
@@ -27,8 +27,7 @@ angular.module('practicaPHP01.services')
              * nombre del usuario en sesión.
              */
 
-             if (user.email !== undefined && user.password !== undefined && user.repeatPassword !== undefined) {
-
+             if (user.email !== undefined && user.password !== undefined) {
                 // Calls the back-end service
                 $http({
                     method: 'POST',
@@ -41,12 +40,8 @@ angular.module('practicaPHP01.services')
                     console.debug("Error");
                     console.log(response)
                 });
-
-                if (data.success) {
-                    alert('Success');
-                } else {
-                    alert('Error');
-                }
+            } else {
+                result.message = "Email and user are required.";
             }
 
             return result;
