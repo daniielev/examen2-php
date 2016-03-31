@@ -6,7 +6,7 @@
     <div class="panel-body">
         <form novalidate autocomplete="off" ng-model="registerForm" name="registerForm" ng-submit="registerUser()">
             <div class="form-group">
-                <label for="email">Name</label>
+                <label for="fullName">Name</label>
                 <input type="text" placeholder="Juan Pérez" id="fullName" ng-model="fullName" name="fullName" class="form-control" required />
                 <span class="help-inline" ng-show="submitted && registerForm.fullName.$error.required">This field is required</span>
             </div>
