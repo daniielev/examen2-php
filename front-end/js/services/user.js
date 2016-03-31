@@ -27,6 +27,28 @@ angular.module('practicaPHP01.services')
              * nombre del usuario en sesión.
              */
 
+             if (user.email !== undefined && user.password !== undefined && user.repeatPassword !== undefined) {
+
+                // Calls the back-end service
+                $http({
+                    method: 'POST',
+                    data: user,
+                    url: '/back-end/user/login'
+                }).then(function successCallback(response) {
+                    console.debug("Success");
+                    console.log(response)
+                }, function errorCallback(response) {
+                    console.debug("Error");
+                    console.log(response)
+                });
+
+                if (data.success) {
+                    alert('Success');
+                } else {
+                    alert('Error');
+                }
+            }
+
             return result;
         };
 

@@ -7,6 +7,16 @@ angular.module('practicaPHP01.controllers')
             $scope.init = function() {
                 console.debug('Login');
 
+                $scope.logInUser = function () {
+                    if ($scope.user.email == $scope.user.email)
+                    console.log('ya esta activ');
+                }
+
+
+                // if ($scope.user.email == 'test@loudapp.com') {
+                //     console.log('working')
+                // }
+
                 /**
                  * TODO: Implementar
                  * Pasos
