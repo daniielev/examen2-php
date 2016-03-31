@@ -7,14 +7,14 @@
         <form novalidate autocomplete="off" ng-model="loginForm" name="loginForm" ng-submit="loginUser()">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" placeholder="email" id="email" ng-model="user.email" name="email" class="form-control" required />
+                <input type="email" placeholder="email" id="email" ng-model="email" name="email" class="form-control" required />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" ng-model="user.password" class="form-control" required ng-minlength="8" />
+                <input type="password" id="password" name="password" ng-model="password" class="form-control" required ng-minlength="8" />
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-block" value="Login" ng-disabled="loginForm.$invalid">
+                <input type="submit" class="btn btn-primary btn-block" value="Login" >
             </div>
         </form>
     </div>
