@@ -28,31 +28,44 @@ angular.module('practicaPHP01.controllers')
                 }
 
                 $scope.loginUser = function () {
-                    var user = {}
+                    var user = {},
+                        flag = false;
                     $scope.errors = [];
 
                     // Checks if the the values exists
-                    if ($scope.email !== "") {
+                    if ($scope.email !== undefined && $scope.password !== undefined) {
                         user.email = $scope.email;
+                        user.password = $scope.password;
+                        flag = true;
                     } else {
-                        $scope.errors.push("E-mail is required");
+                        $scope.errors.push("E-mail and password are required.");
+                        flag = false;
                     }
 
-                    if ($scope.password !== "") {
-                        user.password = $scope.email;
-                    } else {
-                        $scope.errors.push("Password is required");
+                    // If values exists then
+                    if (flag) {
+                        var second_flag = false;
+
+                        // Basic validation for email
+                        if (user.email.indexOf("@") === -1 || user.email.indexOf(".") === -1) {
+                            $scope.errors.push("E-mail is not valid.");
+                            second_flag = false;
+                        } else {
+                            second_flag = true;
+                        }
+
+                        // Basic validation for password
+                        if (user.password.length < 8) {
+                            $scope.errors.push("Password must be at least 8 characters long.");
+                            second_flag = false;
+                        } else {
+                            second_flag = true;
+                        }
                     }
 
-                    if (user.email.indexOf("@") && user.email.indexOf(".")) {
-                        $scope.errors.push("E-mail is not valid");
+                    if ($scope.loginForm.$valid) {
+                        UserService.register(user);
                     }
-
-                    console.log(user);
-
-                    // if ($scope.loginForm.$valid) {
-                    //     UserService.register(user);
-                    // }
                 };
             };
 
