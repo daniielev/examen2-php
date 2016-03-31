@@ -7,16 +7,6 @@ angular.module('practicaPHP01.controllers')
             $scope.init = function() {
                 console.debug('Login');
 
-                $scope.logInUser = function () {
-                    if ($scope.user.email == $scope.user.email)
-                    console.log('ya esta activ');
-                }
-
-
-                // if ($scope.user.email == 'test@loudapp.com') {
-                //     console.log('working')
-                // }
-
                 /**
                  * TODO: Implementar
                  * Pasos
@@ -28,6 +18,26 @@ angular.module('practicaPHP01.controllers')
                  * - Agregue las validaciones necesarias: contenido vacio, correo en formato de correo.
                  * - Provea mensajes de error descriptivos.
                  */
+
+                // Checks if the user has an active session
+                var isLoggedIn = UserService.isLoggedIn();
+
+                if (isLoggedIn.success) {
+                    $location.path("#/home");
+                }
+
+                $scope.loginUser = function () {
+                    var user = {
+                        email : $scope.user.email,
+                        password : $scope.user.password
+                    };
+
+                    console.log(user);
+
+                    if ($scope.loginForm.$valid) {
+                        UserService.register(user);
+                    }
+                };
             };
 
             $scope.init();

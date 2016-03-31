@@ -10,11 +10,14 @@ angular.module('practicaPHP01.controllers')
                 $scope.error = null;
                 $scope.user = null;
 
-                if (UserService.isLoggedIn()) {
+                var flag = UserService.isLoggedIn();
+
+                if (flag.success) {
                     $scope.user = UserService.getCurrentUser();
                 } else {
                     // TODO: envie el usuario a la ruta de `home`.
                     $scope.error = true;
+                    $location.path("/home");
                 }
             };
 
