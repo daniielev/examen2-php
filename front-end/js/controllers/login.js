@@ -29,14 +29,23 @@ angular.module('practicaPHP01.controllers')
 
                 $scope.loginUser = function () {
                     var user = {}
+                    $scope.errors = [];
 
                     // Checks if the the values exists
                     if ($scope.email !== "") {
                         user.email = $scope.email;
+                    } else {
+                        $scope.errors.push("E-mail is required");
                     }
 
                     if ($scope.password !== "") {
                         user.password = $scope.email;
+                    } else {
+                        $scope.errors.push("Password is required");
+                    }
+
+                    if (user.email.indexOf("@") && user.email.indexOf(".")) {
+                        $scope.errors.push("E-mail is not valid");
                     }
 
                     console.log(user);
