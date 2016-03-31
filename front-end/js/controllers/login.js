@@ -23,7 +23,7 @@ angular.module('practicaPHP01.controllers')
                 var isLoggedIn = UserService.isLoggedIn();
 
                 if (isLoggedIn.success) {
-                    $location.path("#/home");
+                    $location.path("/home");
                 }
 
                 $scope.loginUser = function () {

@@ -158,8 +158,10 @@ angular.module('practicaPHP01.services')
             var userKeyLS = "_/App_User";
             var user = ClientStorage.get(userKeyLS);
 
-            if (user !== null && user.email !== "") {
-                result.success = true;
+            if (user !== null) {
+                if (user.email) {
+                    result.success = true;
+                }
             } else {
                 result.message = "Not logged in user found";
             }
