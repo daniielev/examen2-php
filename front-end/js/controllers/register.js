@@ -36,4 +36,20 @@ angular.module('practicaPHP01.controllers')
             };
 
             $scope.init();
-        }]);
+
+        }])
+
+        // Directive to valid pass match
+        .directive('validPasswordC', function () {
+            return {
+                require: 'ngModel',
+                link: function (scope, elm, attrs, ctrl) {
+                    ctrl.$parsers.unshift(function (viewValue, $scope) {
+                        var noMatch = viewValue != scope.registerForm.password.$viewValue
+                        ctrl.$setValidity('noMatch', !noMatch)
+                    })
+                }
+            }
+        })
+
+
