@@ -187,16 +187,15 @@ angular.module('practicaPHP01.services')
             /**
              * TODO: Implementar
              * Pasos
-             * - Verifique que el usuario tenga sesión activa.
+             * - Verifique que el usuario tenga sesión activa. -- DONE
              * - Maneje los siguientes escenarios:
-             *  - El usuario tiene sesión activa, retorne un objeto con el email del usuario.
-             *  - El usuario no tiene sesión activa, retorne `null`.
+             *  - El usuario tiene sesión activa, retorne un objeto con el email del usuario. -- DONE
+             *  - El usuario no tiene sesión activa, retorne `null`. -- DONE
              */
             var checkUser = session();
 
             if (checkUser.email) {
                 user.email = checkUser.email;
-                user.fullName = checkUser.fullName;
             } else {
                 user = null;
             }
