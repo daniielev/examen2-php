@@ -155,10 +155,10 @@ angular.module('practicaPHP01.services')
             /**
              * TODO: Implementar
              * Pasos
-             * - Verifique si existe algún dato en `ClientStorage`.
+             * - Verifique si existe algún dato en `ClientStorage`. -- DONE
              * - Maneje los siguientes escenarios:
-             *  - Si existe algún dato, el usuario tiene sesión activa.
-             *  - No existe ningún dato, el usuario no cuenta con sesión activa.
+             *  - Si existe algún dato, el usuario tiene sesión activa. -- DONE
+             *  - No existe ningún dato, el usuario no cuenta con sesión activa. -- DONE
              */
             var userKeyLS = "_/App_User";
             var user = ClientStorage.get(userKeyLS);
