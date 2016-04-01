@@ -2,8 +2,8 @@ angular.module('practicaPHP01.controllers')
     /**
      * Inicia la sesión del usuario en el sistema.
      */
-    .controller('LoginController', ['$scope', 'UserService', '$location',
-        function ($scope, UserService, $location) {
+    .controller('LoginController', ['$scope', 'UserService', '$location', '$q', '$timeout',
+        function ($scope, UserService, $location, $q, $timeout) {
             $scope.init = function() {
                 console.debug('Login');
 
@@ -61,10 +61,21 @@ angular.module('practicaPHP01.controllers')
                         } else {
                             second_flag = true;
                         }
-                    }
 
-                    if ($scope.loginForm.$valid) {
-                        UserService.login(user);
+                        if (second_flag) {
+                            var callService = $q(function (resolve, reject) {
+                                var res = UserService.login(user);
+
+                                $timeout(
+                                    function() {
+                                        resolve(res)
+                                    }, Math.random() * 2000 + 1000);
+                            });
+
+                            callService.then(function (response) {
+                                console.log(response);
+                            });
+                        }
                     }
                 };
             };
