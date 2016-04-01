@@ -2,7 +2,7 @@ angular.module('practicaPHP01.services')
     /**
      * Encargado de todas las operaciones relacionadas con los usuarios.
      */
-    .service('UserService', ['$http', 'ClientStorage', function ($http, ClientStorage) {
+    .service('UserService', ['$http', 'ClientStorage', '$timeout', function ($http, ClientStorage, $timeout) {
         /**
          *
          * @param email
@@ -17,28 +17,38 @@ angular.module('practicaPHP01.services')
             /**
              * TODO: Implementar
              * Pasos
-             * - Asegúrese que tanto el email y el password estén definidos.
-             * - Llame al backend con los datos del formulario (URL: `/back-end/user/login`).
+             * - Asegúrese que tanto el email y el password estén definidos. -- DONE
+             * - Llame al backend con los datos del formulario (URL: `/back-end/user/login`). -- DONE
              * - Basado en la respuesta, maneje los siguientes escenarios:
-             *  - El email y password son correctos.
-             *  - El email no está registrado.
-             *  - El password es inválido.
+             *  - El email y password son correctos. -- DONE
+             *  - El email no está registrado. -- DONE
+             *  - El password es inválido. -- DONE
              * - Si el primer escenario ocurre almacene un objeto usando `ClientStorage` que contenga el email y el
-             * nombre del usuario en sesión.
+             * nombre del usuario en sesión. -- DONE
              */
 
-             if (user.email !== undefined && user.password !== undefined) {
+            if (user.email != undefined && user.password != undefined) {
                 // Calls the back-end service
                 $http({
                     method: 'POST',
                     data: user,
                     url: '/back-end/user/login'
                 }).then(function successCallback(response) {
-                    console.debug("Success");
-                    console.log(response)
+                    if (!response.data.error) {
+                        if (user.email && user.password) {
+                            result.success = true;
+                            ClientStorage.put("_/App_User", {"email":user.email, "password": user.password});
+                        } else {
+                            if (user.password != response.data.password) {
+                                result.message = "The password for the user is invalid.";
+                            }
+                        }
+                    } else {
+                        result.message = response.data.message;
+                    }
+
                 }, function errorCallback(response) {
-                    console.debug("Error");
-                    console.log(response)
+                    result.message = response;
                 });
             } else {
                 result.message = "Email and user are required.";
