@@ -160,8 +160,7 @@ angular.module('practicaPHP01.services')
              *  - Si existe algún dato, el usuario tiene sesión activa. -- DONE
              *  - No existe ningún dato, el usuario no cuenta con sesión activa. -- DONE
              */
-            var userKeyLS = "_/App_User";
-            var user = ClientStorage.get(userKeyLS);
+            var user = session();
 
             if (user !== null) {
                 if (user.email) {
@@ -193,9 +192,24 @@ angular.module('practicaPHP01.services')
              *  - El usuario tiene sesión activa, retorne un objeto con el email del usuario.
              *  - El usuario no tiene sesión activa, retorne `null`.
              */
+            var checkUser = session();
+
+            if (checkUser.email) {
+                user.email = checkUser.email;
+                user.fullName = checkUser.fullName;
+            } else {
+                user = null;
+            }
 
             return user;
         };
+
+        function session () {
+            var userKeyLS = "_/App_User",
+                user = ClientStorage.get(userKeyLS);
+
+            return user;
+        }
 
         return {
             getCurrentUser: getCurrentUser,

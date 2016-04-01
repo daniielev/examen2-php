@@ -68,7 +68,6 @@ angular.module('practicaPHP01.controllers')
                             });
 
                             callService.then(function (response) {
-                                console.log(response);
                                 if (response.success) {
                                     checkLogin();
                                 } else {
