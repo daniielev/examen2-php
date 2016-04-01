@@ -4,6 +4,7 @@
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
+        <div class="alert alert-danger" ng-show="error">{{ error }}</div>
         <form novalidate autocomplete="off" ng-model="loginForm" name="loginForm" ng-submit="loginUser()">
             <div class="form-group">
                 <label for="email">Email</label>
