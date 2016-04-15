@@ -2,31 +2,31 @@
 
 namespace App\Controllers;
 
-use App\Services\GamesService;
+use App\Services\UserService;
 use Slim\Http\Request;
 
-class MainController {
+class UserController {
 
-    private $gamesService;
+    private $userService;
 
     /**
-     * MainController constructor.
+     * UserController constructor.
      */
     public function __construct() {
-        $this->gamesService = new GamesService();
+        $this->userService = new UserService();
     }
 
     /**
-     * Function descrption here
+     * Intermediario entre el Front-End y el servicio.
      *
      * @param Request $request
      *
      * @return []
      */
-    public function list($request) {
+    public function listado($request) {
         $result = [];
 
-        $listResult = $this->gamesService->list();
+        $listResult = $this->userService->listado();
 
         if (array_key_exists("error", $listResult)) {
             $result["error"] = true;
@@ -37,4 +37,5 @@ class MainController {
 
         return $result;
     }
+
 }

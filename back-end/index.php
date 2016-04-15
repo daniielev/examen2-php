@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * index.php
+ * Inicia la aplicación y sirve como enrutador para el back-end.
+ */
+
 require "bootstrap.php";
 
 use Slim\Http\Request;
@@ -12,19 +17,23 @@ $configuration = [
     ],
 ];
 
-$container = new \Slim\Container($configuration);
-$app = new \Slim\App($container);
+$contenedor = new \Slim\Container($configuration);
+
+// Crea una nueva instancia de SLIM mostrando todos los errores
+// http://www.slimframework.com/docs/handlers/error.html
+$app = new \Slim\App($contenedor);
+
 
 $app->get(
     '/games/listado',
     function ($request, $response) {
         /** @var Request $request */
         /** @var Response $response */
-        $mainController = new App\Controllers\MainController();
-        $result = $mainController->list($request);
-        // return $response->withJson($result);
-        return $response->write("asdf");
+        $userController = new App\Controllers\UserController();
+        $result = $userController->listado($request);
+        return $response->withJson($result);
     }
 );
 
+// Corremos la aplicación.
 $app->run();
