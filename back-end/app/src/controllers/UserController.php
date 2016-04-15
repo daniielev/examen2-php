@@ -38,7 +38,37 @@ class UserController {
         return $result;
     }
 
-    public function details($request) {
+    public function create($request) {
+        $result = [];
+        $errors = [];
+
+        $requestData = $request->getParsedBody();
+
+        foreach ($requestData as $key => $value) {
+            if (empty($value)) {
+                array_push($errors, "The field ".$key." is required.");
+            }
+        }
+
+        if (count($errors) > 0) {
+            $result["error"] = true;
+            $result["message"] = $errors;
+        } else {
+            $createResult = $this->userService->create($requestData);
+
+            if (array_key_exists("error", $createResult)) {
+                $result["error"] = true;
+                $result["message"] = $createResult["message"];
+            } else {
+                $result["success"] = true;
+                $result["message"] = $createResult["data"];
+            }
+        }
+
+        return $result;
+    }
+
+    public function deatils($request) {
         $result = [];
 
         $id = $request->getAttribute("id", null);
