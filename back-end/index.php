@@ -35,5 +35,16 @@ $app->get(
     }
 );
 
+$app->get(
+    '/game/details/{id}',
+    function ($request, $response) {
+        /** @var Request $request */
+        /** @var Response $response */
+        $userController = new App\Controllers\UserController();
+        $result = $userController->details($request);
+        return $response->withJson($result);
+    }
+);
+
 // Corremos la aplicación.
 $app->run();

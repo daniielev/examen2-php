@@ -38,4 +38,26 @@ class UserController {
         return $result;
     }
 
+    public function details($request) {
+        $result = [];
+
+        $id = $request->getAttribute("id", null);
+
+        if (isset($id)) {
+            $detailsResult = $this->userService->details($id);
+
+            if (array_key_exists("error", $detailsResult)) {
+                $result["error"] = true;
+                $result["message"] = $detailsResult["message"];
+            } else {
+                $result["data"] = $detailsResult["data"];
+            }
+        } else {
+            $result["error"] = true;
+            $result["message"] = "The game id is required.";
+        }
+
+        return $result;
+    }
+
 }

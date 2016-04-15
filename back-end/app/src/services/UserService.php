@@ -53,6 +53,36 @@ class UserService {
         return $result;
     }
 
+    public function details($id) {
+        $result = [];
+
+        $query = "SELECT id, title, developer, description, console, launch_date, rate, cover_url FROM app_games WHERE id = :id LIMIT 1";
+        $param = [":id" => intval($id)];
+
+        $query_result = $this->storage->query($query, $param);
+
+        if (count($query_result['data']) > 0) {
+            $game = $query_result['data'][0];
+
+            $result["data"] = [
+                "id" => $game["id"],
+                "title" => $game["title"],
+                "developer" => $game["developer"],
+                "description" => $game["description"],
+                "console" => $game["console"],
+                "launch_date" => $game["launch_date"],
+                "rate" => $game["rate"],
+                "cover_url" => $game["cover_url"]
+            ];
+
+        } else {
+            $result["error"] = true;
+            $result["message"] = "The game requested does not exist.";
+        }
+
+        return $result;
+    }
+
 
 
 }
