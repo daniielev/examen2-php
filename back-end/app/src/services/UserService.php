@@ -99,10 +99,23 @@ class UserService {
                             $result["error"] = true;
                             $result["message"] = "Please provide a valid lauch date. Eg.: YYY-MM-DD";
                         } else {
-                            // if (filter_var(variable)) {
-                            //     # code...
-                            // }
-                            $result["data"] = "Game saved.";
+                            $query = "INSERT INTO app_games (title, developer, description, console, launch_date, rate, cover_url) VALUES(:title, :developer, :description, :console, :launch_date, :rate, :cover_url)";
+
+                            $params = [
+                                ":title" => $game["title"],
+                                ":developer" => $game["developer"],
+                                ":description" => $game["description"],
+                                ":console" => $game["console"],
+                                ":launch_date" => $game["launch_date"],
+                                ":rate" => $game["rate"],
+                                ":cover_url" => $game["cover_url"],
+                            ];
+
+                            $query_result = $this->storage->query($query, $params, "INSERT");
+
+                            if ($query_result['data'] > 0) {
+                                $result["data"] = "The game has been successfully saved.";
+                            }
                         }
                     }
                 } else {
@@ -110,19 +123,6 @@ class UserService {
                     $result["message"] = "The rate must be a valid number";
                 }
             }
-
-            // $query = "INSERT INTO app_games (title, developer, description, console, launch_date, rate, cover_url) VALUES(:title, :developer, :description, :console, :launch_date, :rate, :cover_url)";
-            // $params = [
-            //     ":title" => $game["title"],
-            //     ":developer" => $game["developer"],
-            //     ":description" => $game["description"],
-            //     ":console" => $game["console"],
-            //     ":launch_date" => $game["launch_date"],
-            //     ":rate" => $game["rate"],
-            //     ":cover_url" => $game["cover_url"],
-            // ];
-
-            // $query_result = $this->storage->query($query, $params);
         }
 
         return $result;

@@ -47,7 +47,7 @@ class StorageService {
      *
      * @return array
      */
-    public function query($query, $params=[]) {
+    public function query($query, $params=[], $type="SELECT") {
         /**
          * Creamos un diccionario en donde se almacenará el resultado de la operación.
          * Los datos en sí, se regresarán bajo la llave `data` del diccionario, iniciada en null
@@ -57,16 +57,15 @@ class StorageService {
         ];
 
         try {
-            // Preparamos la sentencia a ejecutar
             $stmt = $this->pdo->prepare($query);
-
-            // Asignamos los parámetros a la sentencia
             $stmt->execute($params);
 
-            // Ejecutamos la sentencia
-            while ($content = $stmt->fetch()) {
-                // Vaciando el contenido de cada fila dentro de `data` en el diccionario `result`.
-                $result['data'][] = $content;
+            if ($type === "SELECT") {
+                while ($content = $stmt->fetch()) {
+                    $result['data'][] = $content;
+                }
+            } else {
+                $result['data'] = $stmt->rowCount();
             }
         } catch (PDOException $e) {
             // En caso de que algo saliera mal con nuestro intento de conexión, el mensaje se envia de vuelta al
