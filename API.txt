@@ -1,0 +1,11 @@
+Examen PHP
+1.  Crear la base de datos con el query correspondiente.
+2.  Instalar composer https://getcomposer.org/
+3.  Tener slim http://www.slimframework.com/
+4.  Tener el archivo dentro de un servidor FUNCIONAL.
+5.  Obtener https://www.getpostman.com/
+6.  Enviar la ruta a postman:
+    6.1 Listado: http://localhost:NUMERO-DE-PUERTO/back-end/listado
+    6.2 Detalle: http://localhost:NUMERO-DE-PUERTO/back-end/games/1
+    6.3 Crear: http://localhost:NUMERO-DE-PUERTO/back-end/game/create
+        6.3.1: Para este punto enviar los parametros por medio de postman body y seleccionando form-data.
