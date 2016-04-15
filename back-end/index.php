@@ -1,10 +1,5 @@
 <?php
 
-/**
- * index.php
- * Inicia la aplicación y sirve como enrutador para el back-end.
- */
-
 require "bootstrap.php";
 
 use Slim\Http\Request;
@@ -17,11 +12,8 @@ $configuration = [
     ],
 ];
 
-$contenedor = new \Slim\Container($configuration);
-
-// Crea una nueva instancia de SLIM mostrando todos los errores
-// http://www.slimframework.com/docs/handlers/error.html
-$app = new \Slim\App($contenedor);
+$container = new \Slim\Container($configuration);
+$app = new \Slim\App($container);
 
 // Definimos nuestras rutas
 $app->post(
@@ -32,10 +24,10 @@ $app->post(
         /** @var Response $response */
 
         // Pedimos una instancia del controlador del usuario
-        $userController = new App\Controllers\UserController();
+        $mainController = new App\Controllers\MainController();
 
         // Almacenamos el resultado de la operación en la siguiente variable
-        $result = $userController->login($request);
+        $result = $mainController->login($request);
 
         // Retornamos un JSON con el resultado al Front-End
         return $response->withJson($result);
@@ -47,8 +39,8 @@ $app->get(
     function ($request, $response) {
         /** @var Request $request */
         /** @var Response $response */
-        $userController = new App\Controllers\UserController();
-        $result = $userController->logout($request);
+        $mainController = new App\Controllers\MainController();
+        $result = $mainController->logout($request);
         return $response->withJson($result);
     }
 );
@@ -58,11 +50,10 @@ $app->post(
     function ($request, $response) {
         /** @var Request $request */
         /** @var Response $response */
-        $userController = new App\Controllers\UserController();
-        $result = $userController->register($request);
+        $mainController = new App\Controllers\MainController();
+        $result = $mainController->register($request);
         return $response->withJson($result);
     }
 );
 
-// Corremos la aplicación.
 $app->run();

@@ -15,14 +15,13 @@ class UserService {
      * UserService constructor.
      */
     public function __construct() {
-        // Verificación de la base de datos
         if ($this->isDBReady) {
             $this->storage = new StorageService();
         }
     }
 
     /**
-     * Encargado de iniciar la sesión del usuario.
+     * Descr goes here.
      *
      * @param string $email
      * @param string $password
@@ -87,74 +86,6 @@ class UserService {
             }
         } else {
             // El email está en blanco
-            $result["message"] = "Email is required.";
-            $result["error"] = true;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Registra un nuevo usuario en el sistema.
-     *
-     * @param string $email
-     * @param string $password
-     * @param string $passwordConfirm
-     * @param string $fullName
-     *
-     * @return array
-     */
-    public function register($email, $password, $passwordConfirm, $fullName) {
-        $result = [];
-
-        /**
-         * TODO: Implementar
-         * Pasos
-         * - Verifique la existencia y validez de todos los datos, que todos existan y tengan el formato correcto,
-         * use como guía el método `login`.
-         * - Verifique que las contraseñas coincidan.
-         * - Verifique que el email no ha sido usado en el sistema.
-         * - Si todo lo anterior fue verificado existosamente, cree un nuevo usuario en el sistema y comuníquele a
-         * quién consumió el servicio el resultado de la operación en forma de un array similar al del método `login`.
-         */
-
-        if (strlen(trim($email)) > 0) {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                if (strlen(trim($password)) > 0) {
-                    if ($passwordConfirm === $password) {
-                        $user_flag = false;
-
-                        $query = "SELECT id FROM usuarios WHERE email = :email LIMIT 1";
-                        $params = [":email" => $email];
-                        $result = $this->storage->query($query, $params);
-
-                        if (count($result['data']) > 0) {
-                            $user_flag = true;
-                            $result["message"] = "User is already registred.";
-                            $result["error"] = true;
-                        }
-
-                        if (!$user_flag) {
-                            $query = "INSERT INTO usuarios (email, password, full_name) VALUES(:email, :password, :full_name)";
-                            $params = [":email" => $email, ":password" => $password, ":full_name" => $fullName];
-                            $result = $this->storage->query($query, $params);
-
-                            // $result["message"] = $result;
-                            $result["message"] = "The user has been created successfully!";
-                        }
-                    } else {
-                        $result["message"] = "Passwords do not match.";
-                        $result["error"] = true;
-                    }
-                } else {
-                    $result["message"] = "Password is required.";
-                    $result["error"] = true;
-                }
-            } else {
-                $result["message"] = "Email is invalid.";
-                $result["error"] = true;
-            }
-        } else {
             $result["message"] = "Email is required.";
             $result["error"] = true;
         }
